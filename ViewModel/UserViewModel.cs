@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using Wsr1.Model;
 using Wsr1.Core.DialogServices;
+using Wsr1.Core;
 
 namespace Wsr1.ViewModel
 {
@@ -21,7 +22,17 @@ namespace Wsr1.ViewModel
             try
             {
                 if (IsCurrectUser(login, password))
-                    return Users.First(u => u.Login == login && u.Password == password);
+                { 
+                    var  user = Users.First(u => u.Login == login && u.Password == password);
+                    var suser = UserModelSingleton.Instance();
+                    suser.FirstName = user.FirstName;
+                    suser.SecondName = user.SecondName;
+                    suser.LastName = user.LastName;
+                    suser.Login = user.Login;
+                    suser.Password = user.Password;
+                    suser.Role = user.Role;
+                    return suser;
+                }
                 else throw new Exception("Нет такого пользователя");
             }
             catch (Exception ex)

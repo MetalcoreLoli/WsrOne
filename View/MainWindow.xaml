@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wsr1"
         mc:Ignorable="d"
-        
         Title="Вход" Height="600" Width="450">
  
     <Grid>

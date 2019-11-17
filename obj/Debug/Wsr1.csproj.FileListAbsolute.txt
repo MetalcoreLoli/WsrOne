@@ -20,3 +20,5 @@ D:\Projects\CSharp\WPF\Wsr1\bin\Debug\EntityFramework.xml
 D:\Projects\CSharp\WPF\Wsr1\bin\Debug\EntityFramework.SqlServer.xml
 D:\Projects\CSharp\WPF\Wsr1\bin\Debug\ru\EntityFramework.resources.dll
 D:\Projects\CSharp\WPF\Wsr1\obj\Debug\Wsr1.csproj.CopyComplete
+D:\Projects\CSharp\WPF\Wsr1\obj\Debug\View\ManagerView\ManagerWindow.g.cs
+D:\Projects\CSharp\WPF\Wsr1\obj\Debug\View\ManagerView\ManagerWindow.baml

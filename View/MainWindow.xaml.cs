@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Wsr1.View.ManagerView;
 using Wsr1.ViewModel;
 
 namespace Wsr1
@@ -30,7 +31,12 @@ namespace Wsr1
             LoginButton.Click += (s, e) =>
             {
                 var user = context.CheckUserByLoginAndPassword(Login.Text, PassWord.Password);
-                if (user != null) MessageBox.Show("Yay");
+                if (user != null)
+                {
+                    if (user.Role == "Менеджер")
+                        new ManagerWindow().Show();
+                 //   this.Close();
+                }
             };
         }
     }
