@@ -64,7 +64,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Core\AbstractBaseModel.cs" />
+    <Compile Include="Core\EnityModels\Coefficient.cs" />
+    <Compile Include="Core\EnityModels\Executors.cs" />
+    <Compile Include="Core\EnityModels\ExecutorStatus.cs" />
+    <Compile Include="Core\EnityModels\Group.cs" />
+    <Compile Include="Core\EnityModels\Manager.cs" />
+    <Compile Include="Core\EnityModels\Models.cs" />
+    <Compile Include="Core\EnityModels\NatureOfWork.cs" />
+    <Compile Include="Core\EnityModels\Person.cs" />
+    <Compile Include="Core\EnityModels\Quest.cs" />
+    <Compile Include="Core\EnityModels\QuestStatus.cs" />
+    <Compile Include="Core\EnityModels\Salary.cs" />
     <Compile Include="Core\UserModelSingleton.cs" />
+    <Compile Include="Model\CoefficientModel.cs" />
+    <Compile Include="Model\ExecutorModel.cs" />
+    <Compile Include="ViewModel\CoefficientViewModel.cs" />
     <Compile Include="View\ManagerView\ManagerWindow.xaml.cs">
       <DependentUpon>ManagerWindow.xaml</DependentUpon>
     </Compile>
@@ -83,17 +98,6 @@
     <Compile Include="Core\DataBaseConnectionContext.cs" />
     <Compile Include="Core\DialogServices\IDialogService.cs" />
     <Compile Include="Core\DialogServices\MessageBoxService.cs" />
-    <Compile Include="Core\EnityModels\Coefficient.cs" />
-    <Compile Include="Core\EnityModels\Executors.cs" />
-    <Compile Include="Core\EnityModels\ExecutorStatus.cs" />
-    <Compile Include="Core\EnityModels\Group.cs" />
-    <Compile Include="Core\EnityModels\Manager.cs" />
-    <Compile Include="Core\EnityModels\Models.cs" />
-    <Compile Include="Core\EnityModels\NatureOfWork.cs" />
-    <Compile Include="Core\EnityModels\Person.cs" />
-    <Compile Include="Core\EnityModels\Quest.cs" />
-    <Compile Include="Core\EnityModels\QuestStatus.cs" />
-    <Compile Include="Core\EnityModels\Salary.cs" />
     <Compile Include="Model\UserModel.cs" />
     <Compile Include="ViewModel\UserViewModel.cs" />
     <Compile Include="View\MainWindow.xaml.cs">

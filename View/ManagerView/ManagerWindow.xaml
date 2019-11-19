@@ -5,26 +5,55 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wsr1.View.ManagerView"
         mc:Ignorable="d"
+       
         Title="Управление коэффициентами" Height="550" Width="800">
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition/>
             <RowDefinition Height="65"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="175"/>
-        </Grid.ColumnDefinitions>
+        
         <Image 
             Grid.ColumnSpan="2"
             Source="/Core/Image/logo.png"/>
-        <StackPanel
-            VerticalAlignment="Center"
-            HorizontalAlignment="Center"
-            Grid.Row="1">
-           
-        </StackPanel>
+        <DataGrid
+            Grid.Row="1"
+            AutoGenerateColumns="False"
+            IsReadOnly="True"
+            ItemsSource="{Binding Coefficients}">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn
+                    Header="Manager Id"
+                    Binding="{Binding IdManager}"/>
+                <DataGridTextColumn
+                    Header="Анализ и проектирование"
+                    Binding="{Binding CoefficientAnalis}"/>
+                <DataGridTextColumn
+                    Header="Установка оборудования"
+                    Binding="{Binding CoefficientInstall}"/>
+                <DataGridTextColumn
+                    Header="Техническое обслуживание и сопровождение"
+                    Binding="{Binding CoefficientService}"/>
+                <DataGridTextColumn
+                    Header="Сложность"
+                    Binding="{Binding CoefficientDifficult}"/>
+                <DataGridTextColumn
+                    Header="Время"
+                    Binding="{Binding CoefficientMoney}"/>
+                <DataGridTextColumn
+                    Header="Junior(Мин. ЗП)"
+                    Binding="{Binding Junior}"/>
+                <DataGridTextColumn
+                    Header="Middle(Мин. ЗП)"
+                    Binding="{Binding Middle}"/>
+                <DataGridTextColumn
+                    Header="Senior(Мин. ЗП)"
+                    Binding="{Binding Senior}"/>
+            </DataGrid.Columns>
+        </DataGrid>
         <Grid
             Grid.ColumnSpan="2"
             Grid.Row="2">
@@ -38,10 +67,10 @@
                 Style="{StaticResource MainStyleOfButton}"
                 Name="LoginButton"/>
             <Button
-                Content="Выход"
+                Content="Принять"
                 Style="{StaticResource MainStyleOfButton}"
                 Grid.Column="1"
-                Name="LogoutButton"/>
+                Name="AcceptButton"/>
         </Grid>
 
     </Grid>

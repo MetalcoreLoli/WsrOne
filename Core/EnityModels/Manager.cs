@@ -1,4 +1,4 @@
-namespace Wsr1.Core
+namespace Wsr1.Core.EnityModels
 {
     using System;
     using System.Collections.Generic;
@@ -21,11 +21,15 @@ namespace Wsr1.Core
 
         public int? CoefficientId { get; set; }
 
+        public int? SalaryId { get; set; }
+
         public virtual Coefficient Coefficient { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Group> Group { get; set; }
 
         public virtual Person Person { get; set; }
+
+        public virtual Salary Salary { get; set; }
     }
 }

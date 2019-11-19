@@ -9,14 +9,25 @@ using System.Runtime.CompilerServices;
 
 namespace Wsr1.Model
 {
-    public class UserModel : INotifyPropertyChanged
+    public class UserModel : Core.AbstractBaseModel
     {
+        int _id; 
         string _firstName;
         string _secondName;
         string _lastName;
         string _loginName;
         string _passwordName;
         string _role;
+
+        public int Id
+        {
+            get => _id;
+            set
+            {
+                _id = value;
+                OnPropertyChanged();
+            }
+        }
 
         public string FirstName
         {
@@ -75,8 +86,5 @@ namespace Wsr1.Model
                 OnPropertyChanged(nameof(Role));
             }
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName]string prop = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
     }
 }

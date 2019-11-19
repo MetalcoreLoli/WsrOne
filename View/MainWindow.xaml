@@ -30,6 +30,7 @@
                     x:Name="Login"
                     Height="25"
                     Width="175"
+                    Text="kukleva"
                     Style="{StaticResource MainStyleOfTextBox}"
                     />
             </StackPanel>
@@ -46,6 +47,7 @@
                     Height="25"
                     Width="175"
                     FontSize="14" 
+                    Password="123123"
                     VerticalContentAlignment="Center"
                     />
             </StackPanel>

@@ -1,4 +1,4 @@
-namespace Wsr1.Core
+namespace Wsr1.Core.EnityModels
 {
     using System;
     using System.Collections.Generic;
@@ -29,8 +29,6 @@ namespace Wsr1.Core
         public virtual Group Group { get; set; }
 
         public virtual Person Person { get; set; }
-
-        public virtual Salary Salary { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Quest> Quest { get; set; }

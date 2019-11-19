@@ -25,5 +25,10 @@ namespace Wsr1.Core
             }
             else return _instance;
         }
+        public static void Clear()
+        {
+            if (_instance != null)
+                _instance = null;
+        }
     }
 }

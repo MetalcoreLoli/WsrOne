@@ -1,4 +1,4 @@
-namespace Wsr1.Core
+namespace Wsr1.Core.EnityModels
 {
     using System;
     using System.Collections.Generic;
@@ -12,7 +12,7 @@ namespace Wsr1.Core
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Salary()
         {
-            Executors = new HashSet<Executors>();
+            Manager = new HashSet<Manager>();
         }
 
         public decimal JuniorMin { get; set; }
@@ -24,6 +24,6 @@ namespace Wsr1.Core
         public int Id { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Executors> Executors { get; set; }
+        public virtual ICollection<Manager> Manager { get; set; }
     }
 }

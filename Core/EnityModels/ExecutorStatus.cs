@@ -1,4 +1,4 @@
-namespace Wsr1.Core
+namespace Wsr1.Core.EnityModels
 {
     using System;
     using System.Collections.Generic;

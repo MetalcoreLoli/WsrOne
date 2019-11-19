@@ -31,6 +31,7 @@ namespace Wsr1.ViewModel
                     suser.Login = user.Login;
                     suser.Password = user.Password;
                     suser.Role = user.Role;
+                    suser.Id = user.Id;
                     return suser;
                 }
                 else throw new Exception("Нет такого пользователя");
@@ -63,7 +64,8 @@ namespace Wsr1.ViewModel
                         LastName    = user.LastName,
                         Login       = user.Login,
                         Password    = user.Password,
-                        Role        = (con.Manager.Select(m => m.IdPerson).Contains(user.Id)) ? "Менеджер" : "Исполнитель"
+                        Role        = (con.Manager.Select(m => m.IdPerson).Contains(user.Id)) ? "Менеджер" : "Исполнитель",
+                        Id          = (con.Manager.Select(m => m.IdPerson).Contains(user.Id)) ? con.Manager.First(m => m.IdPerson == user.Id).Id : user.Id
                     });
                 }
                 return temp;

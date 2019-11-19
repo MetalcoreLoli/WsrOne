@@ -20,10 +20,13 @@ namespace Wsr1.View.ManagerView
     /// </summary>
     public partial class ManagerWindow : Window
     {
+        ViewModel.CoefficientViewModel context;
         public ManagerWindow()
         {
             InitializeComponent();
             MessageBox.Show("Hello, " + UserModelSingleton.Instance().FirstName);
+            DataContext = context = new ViewModel.CoefficientViewModel();
+            
         }
     }
 }
