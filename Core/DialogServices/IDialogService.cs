@@ -8,6 +8,7 @@ namespace Wsr1.Core.DialogServices
 {
     interface IDialogService
     {
-        void Show();
+        void ShowMessage(string message);
+        void ShowErrorMessage(string message);
     }
 }

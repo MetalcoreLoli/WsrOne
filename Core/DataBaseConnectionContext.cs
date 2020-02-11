@@ -9,6 +9,10 @@ namespace Wsr1.Core
 {
     public class DataBaseConnectionContext
     {
-        public static Models GetContext() => new Models();
+        static Models context;
+        public static Models GetContext()
+        {
+            return new Models();
+        }
     }
 }

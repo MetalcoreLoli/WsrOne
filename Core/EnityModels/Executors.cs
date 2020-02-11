@@ -22,8 +22,6 @@ namespace Wsr1.Core.EnityModels
 
         public int IdExecutorStatus { get; set; }
 
-        public int? SalaryId { get; set; }
-
         public virtual ExecutorStatus ExecutorStatus { get; set; }
 
         public virtual Group Group { get; set; }

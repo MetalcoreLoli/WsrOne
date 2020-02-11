@@ -7,13 +7,42 @@ using System.ComponentModel;
 using Wsr1.Model;
 using System.Collections.ObjectModel;
 using Wsr1.Core;
+using Wsr1.Core.Commands;
+using Wsr1.Core.ValidationModel;
+using System.Windows;
 
 namespace Wsr1.ViewModel
 {
     public class CoefficientViewModel : Core.AbstractBaseModel
     {
-        
+
+        RelayCommand _acceptCommand;
+
+        public RelayCommand Accept
+        {
+            get => _acceptCommand ?? (_acceptCommand = new RelayCommand(obj => 
+            {
+                try
+                {
+                    if (obj != null)
+                    {
+                        CoefficientModel model = obj as CoefficientModel;
+                        Coefficients.Add(model);
+                        using (var db = DataBaseConnectionContext.GetContext())
+                        { 
+                            
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }, model => Validator.IsValidModel(model as CoefficientModel)));
+        }
+
         public ObservableCollection<CoefficientModel> Coefficients { get; set; }
+
         public CoefficientViewModel()
         {
             Coefficients = new ObservableCollection<CoefficientModel>(Init().Where(c => c.IdManager == UserModelSingleton.Instance().Id));
@@ -24,7 +53,7 @@ namespace Wsr1.ViewModel
         {
             using (var con =  DataBaseConnectionContext.GetContext())
             {
-                foreach (var coenff in con.Coefficient)
+                foreach (var coenff in con.Coefficient.AsParallel())
                 {
                     int id = UserModelSingleton.Instance().Id;
                     int salaryId = (int)con.Manager.FirstOrDefault(m => m.Id == id).SalaryId;

@@ -22,6 +22,7 @@ namespace Wsr1.Core.EnityModels
         public virtual DbSet<Quest> Quest { get; set; }
         public virtual DbSet<QuestStatus> QuestStatus { get; set; }
         public virtual DbSet<Salary> Salary { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -48,6 +49,8 @@ namespace Wsr1.Core.EnityModels
             modelBuilder.Entity<Coefficient>()
                 .Property(e => e.CoefficientMoney)
                 .HasPrecision(18, 0);
+
+            
 
             modelBuilder.Entity<Executors>()
                 .HasMany(e => e.Quest)

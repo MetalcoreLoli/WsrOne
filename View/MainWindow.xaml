@@ -3,10 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Wsr1"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"        xmlns:local="clr-namespace:Wsr1"
         mc:Ignorable="d"
+        x:Name="LoginWindow"
+        WindowStartupLocation="CenterScreen"
+        xmlns:vm="clr-namespace:Wsr1.ViewModel"
         Title="Вход" Height="600" Width="450">
- 
+    <Window.DataContext>
+        <vm:LoginViewModel
+            x:Name="loginVM"/>
+    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
@@ -27,7 +33,7 @@
                     Style="{StaticResource MainStyleOfLable}"
                     Content="Логин: "/>
                 <TextBox 
-                    x:Name="Login"
+                    x:Name="LoginBox"
                     Height="25"
                     Width="175"
                     Text="kukleva"
@@ -43,7 +49,7 @@
                     VerticalContentAlignment="Center"
                     Content="Пароль: "/>
                 <PasswordBox 
-                    x:Name="PassWord"
+                    x:Name="PassWordBox"
                     Height="25"
                     Width="175"
                     FontSize="14" 
@@ -62,7 +68,15 @@
                 Content="Вход"
                 Grid.Column="0"
                 Style="{StaticResource MainStyleOfButton}"
-                Name="LoginButton"/>
+                Name="LoginButton">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <i:InvokeCommandAction
+                            Command="{Binding LogIn}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
             <Button
                 Content="Регистрация"
                 Style="{StaticResource MainStyleOfButton}"

@@ -8,15 +8,15 @@ namespace Wsr1.Core.DialogServices
 {
     public class MessageBoxService : IDialogService
     {
-        public string Message { get; set; }
 
-        public MessageBoxService(string message)
+        public void ShowErrorMessage(string message)
         {
-            Message = message;
+            System.Windows.MessageBox.Show(message, "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
         }
-        public void Show()
+
+        public void ShowMessage(string message)
         {
-            System.Windows.MessageBox.Show(Message);
+            System.Windows.MessageBox.Show(message);
         }
     }
 }

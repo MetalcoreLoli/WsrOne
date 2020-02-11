@@ -5,7 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
-
+using Wsr1.Core.ValidationModel.Attributes;
+using Wsr1.Core.EnityModels;
 
 namespace Wsr1.Model
 {
@@ -19,6 +20,7 @@ namespace Wsr1.Model
         string _passwordName;
         string _role;
 
+        [NotNull]
         public int Id
         {
             get => _id;
@@ -29,6 +31,7 @@ namespace Wsr1.Model
             }
         }
 
+        [NotNull]
         public string FirstName
         {
             get => _firstName;
@@ -39,6 +42,7 @@ namespace Wsr1.Model
             }
         }
 
+        [NotNull]
         public string SecondName
         {
             get => _secondName;
@@ -48,6 +52,7 @@ namespace Wsr1.Model
                 OnPropertyChanged(nameof(SecondName));
             }
         }
+        [NotNull]
         public string LastName
         {
             get => _lastName;
@@ -58,6 +63,7 @@ namespace Wsr1.Model
             }
         }
 
+        [NotNull] 
         public string Login
         {
             get => _loginName;
@@ -67,6 +73,7 @@ namespace Wsr1.Model
                 OnPropertyChanged(nameof(Login));
             }
         }
+        [NotNull]
         public string Password
         {
             get => _passwordName;
@@ -77,6 +84,7 @@ namespace Wsr1.Model
             }
         }
 
+        [NotNull]
         public string Role
         {
             get => _role;
@@ -85,6 +93,19 @@ namespace Wsr1.Model
                 _role = value;
                 OnPropertyChanged(nameof(Role));
             }
+        }
+
+        public UserModel CraeteFromPerson(Person person)
+        {
+            Id = person.Id;
+            FirstName = person.FirstName;
+            SecondName = person.SecondName;
+            LastName = person.LastName;
+            Login = person.Login;
+            Password = person.Password;
+            using (var con = Core.DataBaseConnectionContext.GetContext())
+                Role = (con.Manager.Select(m => m.IdPerson).Contains(person.Id)) ? "Менеджер" : "Исполнитель";
+            return this;
         }
     }
 }

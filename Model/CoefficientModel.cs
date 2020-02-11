@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Wsr1.Core.ValidationModel.Attributes;
 
 namespace Wsr1.Model
 {
@@ -22,6 +23,7 @@ namespace Wsr1.Model
         decimal _middle;
         decimal _senior;
 
+        [NotNull]
         public decimal Junior
         {
             get => _junior;
@@ -32,6 +34,7 @@ namespace Wsr1.Model
             }
         }
 
+        [NotNull]
         public decimal Middle
         {
             get => _middle;
@@ -41,6 +44,8 @@ namespace Wsr1.Model
                 OnPropertyChanged();
             }
         }
+        
+        [NotNull]
         public decimal Senior
         {
             get => _senior;
@@ -50,6 +55,8 @@ namespace Wsr1.Model
                 OnPropertyChanged();
             }
         }
+
+        [NotNull]
         public int Id
         {
             get => _id;
@@ -59,7 +66,8 @@ namespace Wsr1.Model
                 OnPropertyChanged();
             }
         }
-
+        
+        [NotNull]
         public int IdManager
         {
             get => _idManager;
@@ -70,6 +78,7 @@ namespace Wsr1.Model
             }
         }
 
+        [NotNull, Range(0, 1)] 
         public decimal CoefficientAnalis
         {
             get => _coefficientAnalis;
@@ -79,6 +88,7 @@ namespace Wsr1.Model
                 OnPropertyChanged();
             }
         }
+        [NotNull, Range(0, 1)]
         public decimal CoefficientInstall
         {
             get => _coefficientInstall;
@@ -89,6 +99,7 @@ namespace Wsr1.Model
             }
         }
 
+        [NotNull, Range(0, 1)]
         public decimal CoefficientService
         {
             get => _coefficientService;
@@ -98,6 +109,7 @@ namespace Wsr1.Model
                 OnPropertyChanged();
             }
         }
+        [NotNull]
         public decimal CoefficientTime
         {
             get => _coefficientTime;
@@ -106,7 +118,10 @@ namespace Wsr1.Model
                 _coefficientTime = value;
                 OnPropertyChanged();
             }
+
         }
+        
+        [NotNull]
         public decimal CoefficientDifficult
         {
             get => _coefficientDifficult;
@@ -116,6 +131,8 @@ namespace Wsr1.Model
                 OnPropertyChanged();
             }
         }
+
+        [NotNull]
         public decimal CoefficientMoney
         {
             get => _coefficientMoney;

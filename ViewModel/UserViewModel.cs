@@ -8,6 +8,7 @@ using System.Threading;
 using Wsr1.Model;
 using Wsr1.Core.DialogServices;
 using Wsr1.Core;
+using Wsr1.Core.ValidationModel;
 
 namespace Wsr1.ViewModel
 {
@@ -38,15 +39,14 @@ namespace Wsr1.ViewModel
             }
             catch (Exception ex)
             {
-                (dialogService as MessageBoxService).Message = ex.Message;
-                dialogService.Show();
+                dialogService.ShowErrorMessage(ex.Message);
             }
             return null;
         }
         
         public UserViewModel()
         {
-            dialogService = new MessageBoxService("");
+            dialogService = new MessageBoxService();
             Users = new ObservableCollection<UserModel>(InitUsers());
         }
 

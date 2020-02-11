@@ -25,9 +25,7 @@
             ItemsSource="{Binding Coefficients}">
 
             <DataGrid.Columns>
-                <DataGridTextColumn
-                    Header="Manager Id"
-                    Binding="{Binding IdManager}"/>
+               
                 <DataGridTextColumn
                     Header="Анализ и проектирование"
                     Binding="{Binding CoefficientAnalis}"/>
@@ -40,9 +38,10 @@
                 <DataGridTextColumn
                     Header="Сложность"
                     Binding="{Binding CoefficientDifficult}"/>
+ 
                 <DataGridTextColumn
                     Header="Время"
-                    Binding="{Binding CoefficientMoney}"/>
+                    Binding="{Binding CoefficientTime}"/>
                 <DataGridTextColumn
                     Header="Junior(Мин. ЗП)"
                     Binding="{Binding Junior}"/>
@@ -70,8 +69,7 @@
                 Content="Принять"
                 Style="{StaticResource MainStyleOfButton}"
                 Grid.Column="1"
-                Name="AcceptButton"/>
+                Name="EditButton"/>
         </Grid>
-
     </Grid>
 </Window>

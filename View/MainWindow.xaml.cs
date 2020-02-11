@@ -22,22 +22,11 @@ namespace Wsr1
     /// </summary>
     public partial class MainWindow : Window
     {
-        UserViewModel context;
         public MainWindow()
         {
             InitializeComponent();
            
-            DataContext = context = new UserViewModel();
-            LoginButton.Click += (s, e) =>
-            {
-                var user = context.CheckUserByLoginAndPassword(Login.Text, PassWord.Password);
-                if (user != null)
-                {
-                    if (user.Role == "Менеджер")
-                        new ManagerWindow().Show();
-                 //   this.Close();
-                }
-            };
+            DataContext = loginVM = new LoginViewModel();
         }
     }
 }

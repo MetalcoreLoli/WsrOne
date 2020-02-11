@@ -26,7 +26,6 @@ namespace Wsr1.View.ManagerView
             InitializeComponent();
             MessageBox.Show("Hello, " + UserModelSingleton.Instance().FirstName);
             DataContext = context = new ViewModel.CoefficientViewModel();
-            
         }
     }
 }

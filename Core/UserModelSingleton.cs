@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Wsr1.Core.EnityModels;
 using Wsr1.Model;
 
 namespace Wsr1.Core
@@ -24,6 +25,13 @@ namespace Wsr1.Core
                 return _instance;
             }
             else return _instance;
+        }
+
+        public static UserModel Instance(Person user)
+        {
+            var user_singleton = UserModelSingleton.Instance();
+            user_singleton.CraeteFromPerson(user);
+            return user_singleton;
         }
         public static void Clear()
         {
