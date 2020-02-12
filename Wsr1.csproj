@@ -84,6 +84,7 @@
     <Compile Include="Core\EnityModels\QuestStatus.cs" />
     <Compile Include="Core\EnityModels\Salary.cs" />
     <Compile Include="Core\EnityModels\sysdiagrams.cs" />
+    <Compile Include="Core\Enums\Role.cs" />
     <Compile Include="Core\UserModelSingleton.cs" />
     <Compile Include="Core\ValidationModel\Attributes\NotNullAttribute.cs" />
     <Compile Include="Core\ValidationModel\Attributes\RangeAttribute.cs" />
@@ -112,7 +113,6 @@
     <Compile Include="Core\DialogServices\IDialogService.cs" />
     <Compile Include="Core\DialogServices\MessageBoxService.cs" />
     <Compile Include="Model\UserModel.cs" />
-    <Compile Include="ViewModel\UserViewModel.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -149,9 +149,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Core\NewFolder1\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Core\Image\logo.png" />
   </ItemGroup>

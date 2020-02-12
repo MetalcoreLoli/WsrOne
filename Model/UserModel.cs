@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Data.Entity;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
 using Wsr1.Core.ValidationModel.Attributes;
 using Wsr1.Core.EnityModels;
+using Wsr1.Core.Enums;
 
 namespace Wsr1.Model
 {
@@ -18,7 +20,7 @@ namespace Wsr1.Model
         string _lastName;
         string _loginName;
         string _passwordName;
-        string _role;
+        Role _role;
 
         [NotNull]
         public int Id
@@ -85,7 +87,7 @@ namespace Wsr1.Model
         }
 
         [NotNull]
-        public string Role
+        public Role Role
         {
             get => _role;
             set
@@ -95,7 +97,7 @@ namespace Wsr1.Model
             }
         }
 
-        public UserModel CraeteFromPerson(Person person)
+        public UserModel CreateFromPerson(Person person)
         {
             Id = person.Id;
             FirstName = person.FirstName;
@@ -103,8 +105,8 @@ namespace Wsr1.Model
             LastName = person.LastName;
             Login = person.Login;
             Password = person.Password;
-            using (var con = Core.DataBaseConnectionContext.GetContext())
-                Role = (con.Manager.Select(m => m.IdPerson).Contains(person.Id)) ? "Менеджер" : "Исполнитель";
+            using (var context = Core.DataBaseConnectionContext.GetContext())
+                Role = (context.Manager.Select(manager => manager.IdPerson).Contains(person.Id)) ? Role.Manager : Role.Executer;
             return this;
         }
     }

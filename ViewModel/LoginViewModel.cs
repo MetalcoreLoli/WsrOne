@@ -29,29 +29,24 @@ namespace Wsr1.ViewModel
                     if (obj != null)
                     {
                         var loginWindow = obj as MainWindow;
-                        var login = loginWindow.LoginBox.Text;
-                        var password = loginWindow.PassWordBox.Password;
+                        var login       = loginWindow.LoginBox.Text;
+                        var password    = loginWindow.PassWordBox.Password;
 
-                        using (var context = Core.DataBaseConnectionContext.GetContext())
+                        Person user = await GetPersonOrDefalutAsync(login, password);
+                        if (user == null)
+                            throw new Exception("Неизвестный пользователь");
+                        
+                        UserModelSingleton.Instance().CreateFromPerson(user);
+                        switch (UserModelSingleton.Instance().Role)
                         {
-                            Person user = await context
-                                              .Person
-                                              .FirstOrDefaultAsync(person => person.Login.Equals(login) && person.Password.Equals(password));
-                            if (user != null)
-                            { 
-                                UserModelSingleton.Instance(user);
-
-                                switch (UserModelSingleton.Instance().Role)
-                                {
-                                    case "Менеджер":
-                                        new ManagerWindow().Show();
-                                        loginWindow.Close();
-                                        break;
-                                    case "Исполнитель": 
-                                        break;
-                                    default: throw new Exception("Неизвестный пользователь");
-                                }
-                            }
+                            case Core.Enums.Role.Manager:
+                                new ManagerWindow().Show();
+                                loginWindow.Close();
+                                break;
+                            case Core.Enums.Role.Executer:
+                                loginWindow.Close();
+                                break;
+                            default: throw new Exception("Неизвестный пользователь");
                         }
                     }
                 }
@@ -68,6 +63,17 @@ namespace Wsr1.ViewModel
         public LoginViewModel()
         {
             dialogService = new MessageBoxService();
+        }
+        #endregion
+
+        #region Private Methods
+
+        private async Task<Person> GetPersonOrDefalutAsync(string login, string password)
+        {
+            using (var context = Core.DataBaseConnectionContext.GetContext())
+                return await context
+                                  .Person
+                                  .FirstOrDefaultAsync(person => person.Login.Equals(login) && person.Password.Equals(password));
         }
         #endregion
     }

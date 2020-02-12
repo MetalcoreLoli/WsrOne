@@ -30,7 +30,7 @@ namespace Wsr1.Core
         public static UserModel Instance(Person user)
         {
             var user_singleton = UserModelSingleton.Instance();
-            user_singleton.CraeteFromPerson(user);
+            user_singleton.CreateFromPerson(user);
             return user_singleton;
         }
         public static void Clear()
