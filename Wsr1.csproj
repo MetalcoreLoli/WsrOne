@@ -85,6 +85,7 @@
     <Compile Include="Core\EnityModels\Salary.cs" />
     <Compile Include="Core\EnityModels\sysdiagrams.cs" />
     <Compile Include="Core\Enums\Role.cs" />
+    <Compile Include="Core\Singleton.cs" />
     <Compile Include="Core\UserModelSingleton.cs" />
     <Compile Include="Core\ValidationModel\Attributes\NotNullAttribute.cs" />
     <Compile Include="Core\ValidationModel\Attributes\RangeAttribute.cs" />
@@ -94,6 +95,9 @@
     <Compile Include="Model\ExecutorModel.cs" />
     <Compile Include="ViewModel\CoefficientViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="View\ManagerView\EditWindow.xaml.cs">
+      <DependentUpon>EditWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ManagerView\ManagerWindow.xaml.cs">
       <DependentUpon>ManagerWindow.xaml</DependentUpon>
     </Compile>
@@ -117,6 +121,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\ManagerView\EditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ManagerView\ManagerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

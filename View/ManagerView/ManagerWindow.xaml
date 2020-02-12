@@ -4,17 +4,22 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wsr1.View.ManagerView"
+        xmlns:vm="clr-namespace:Wsr1.ViewModel"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"        
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="Управление коэффициентами" Height="550" Width="800">
-    
+    <Window.DataContext>
+        <vm:CoefficientViewModel
+            x:Name="coeffVM"/>
+    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition/>
-            <RowDefinition Height="65"/>
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        
+       
         <Image 
             Grid.ColumnSpan="2"
             Source="/Core/Image/logo.png"/>
@@ -22,10 +27,10 @@
             Grid.Row="1"
             AutoGenerateColumns="False"
             IsReadOnly="True"
-            ItemsSource="{Binding Coefficients}">
-
+            SelectedItem="{Binding SelecteModel}"
+            ItemsSource="{Binding Coefficients, UpdateSourceTrigger=PropertyChanged}"
+            >
             <DataGrid.Columns>
-               
                 <DataGridTextColumn
                     Header="Анализ и проектирование"
                     Binding="{Binding CoefficientAnalis}"/>
@@ -51,24 +56,43 @@
                     Header="Senior(Мин. ЗП)"
                     Binding="{Binding Senior}"/>
             </DataGrid.Columns>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <i:InvokeCommandAction
+                        Command="{Binding Source={x:Reference Name=coeffVM}, Path=EditCommand}"
+                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=DataGrid, Mode=FindAncestor}, Path=SelectedItem}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
         </DataGrid>
         <Grid
             Grid.ColumnSpan="2"
-            Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Button
-                Content="Назад"
-                Grid.Column="0"
-                Style="{StaticResource MainStyleOfButton}"
-                Name="LoginButton"/>
-            <Button
-                Content="Принять"
-                Style="{StaticResource MainStyleOfButton}"
-                Grid.Column="1"
-                Name="EditButton"/>
+            Grid.Row="2"
+            Grid.Column="3">
+            <StackPanel
+                Orientation="Horizontal"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+                <Button
+                    Content="Редактировать"
+                    Style="{StaticResource MainStyleOfButton}"
+                    Grid.Column="1"
+                    Name="EditButton">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:InvokeCommandAction
+                                Command="{Binding EditCommand}"
+                                CommandParameter="{Binding SelecteModel}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
+                <Button
+                    Margin="10,0,0,0"
+                    Content="Назад"
+                    Grid.Column="0"
+                    Style="{StaticResource MainStyleOfButton}"
+                    Name="LoginButton"/>
+            </StackPanel>
+           
         </Grid>
     </Grid>
 </Window>

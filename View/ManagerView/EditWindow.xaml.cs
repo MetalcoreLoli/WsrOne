@@ -12,18 +12,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Wsr1.Core;
+using Wsr1.Model;
 
 namespace Wsr1.View.ManagerView
 {
     /// <summary>
-    /// Логика взаимодействия для ManagerWindow.xaml
+    /// Логика взаимодействия для EditWindow.xaml
     /// </summary>
-    public partial class ManagerWindow : Window
+    public partial class EditWindow : Window
     {
-        public ManagerWindow()
+        public CoefficientModel CurrentCoeffcientModel { get; set; }
+        public EditWindow()
         {
             InitializeComponent();
-            MessageBox.Show("Hello, " + UserModelSingleton.Instance().FirstName);
             DataContext = coeffVM = Singleton<ViewModel.CoefficientViewModel>.Instance();
         }
     }

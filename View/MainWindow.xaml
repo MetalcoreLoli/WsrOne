@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"        xmlns:local="clr-namespace:Wsr1"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"        
+        xmlns:local="clr-namespace:Wsr1"
         mc:Ignorable="d"
         x:Name="LoginWindow"
         WindowStartupLocation="CenterScreen"
@@ -27,15 +28,12 @@
             <StackPanel
                 Orientation="Horizontal">
                 <Label 
-                    Height="45"
-                    Width="75"
                     VerticalContentAlignment="Center"
+                    HorizontalContentAlignment="Center"
                     Style="{StaticResource MainStyleOfLable}"
                     Content="Логин: "/>
                 <TextBox 
                     x:Name="LoginBox"
-                    Height="25"
-                    Width="175"
                     Text="kukleva"
                     Style="{StaticResource MainStyleOfTextBox}"
                     />
@@ -43,9 +41,8 @@
             <StackPanel
                 Orientation="Horizontal">
                 <Label 
-                    Height="45"
-                    Width="75"
                     Style="{StaticResource MainStyleOfLable}"
+                    HorizontalContentAlignment="Center"
                     VerticalContentAlignment="Center"
                     Content="Пароль: "/>
                 <PasswordBox 

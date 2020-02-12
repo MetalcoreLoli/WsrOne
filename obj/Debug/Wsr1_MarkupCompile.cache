@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\Projects\CSharp\WPF\Wsr1\App.xaml
-31434321530
+4-1804451904
 
-341232410920
+36-704330902
 20-1485400388
-Core\ResourceDictionaries\MainDictionary.xaml;View\MainWindow.xaml;View\ManagerView\ManagerWindow.xaml;
+Core\ResourceDictionaries\MainDictionary.xaml;View\MainWindow.xaml;View\ManagerView\EditWindow.xaml;View\ManagerView\ManagerWindow.xaml;
 
 False
 

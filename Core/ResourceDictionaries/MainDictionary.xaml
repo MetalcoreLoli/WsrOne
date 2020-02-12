@@ -4,8 +4,13 @@
     <Style 
         TargetType="Label"
         x:Key="MainStyleOfLable">
+
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="Control.FontFamily" Value="Tahoma"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="Width" Value="175"/>
+        
     </Style>
 
     <Style
@@ -14,6 +19,8 @@
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="Control.FontFamily" Value="Tahoma"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Height" Value="25"/>
+        <Setter Property="Width" Value="175"/>
     </Style>
 
     <Style

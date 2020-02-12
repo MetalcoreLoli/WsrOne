@@ -5,6 +5,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Wsr1.Core;
+using Wsr1.Core.EnityModels;
 using Wsr1.Core.ValidationModel.Attributes;
 
 namespace Wsr1.Model
@@ -141,6 +143,29 @@ namespace Wsr1.Model
                 _coefficientMoney = value;
                 OnPropertyChanged();
             }
+        }
+
+        public CoefficientModel CreateFrom(Coefficient coefficient)
+        {
+            using (var con = DataBaseConnectionContext.GetContext())
+            {
+                int id = UserModelSingleton.Instance().Id;
+                int salaryId = (int)con.Manager.FirstOrDefault(m => m.Id == id).SalaryId;
+                Id = coefficient.Id;
+                IdManager = con.Manager.Where(m => m.CoefficientId == coefficient.Id).Select(m => m.Id).First();
+                
+                CoefficientAnalis = coefficient.CoefficientAnalis;
+                CoefficientDifficult = coefficient.CoefficientDifficult;
+                CoefficientInstall = coefficient.CoefficientInstall;
+                CoefficientMoney = coefficient.CoefficientMoney;
+                CoefficientService = coefficient.CoefficientService;
+                CoefficientTime = coefficient.CoefficientTime;
+                
+                Junior = con.Salary.FirstOrDefault(s => s.Id == salaryId).JuniorMin;
+                Middle = con.Salary.FirstOrDefault(s => s.Id == salaryId).MiddleMin;
+                Senior = con.Salary.FirstOrDefault(s => s.Id == salaryId).SeniorMin;
+            }
+            return this;
         }
     }
 }
