@@ -72,18 +72,17 @@
     </ApplicationDefinition>
     <Compile Include="Core\AbstractBaseModel.cs" />
     <Compile Include="Core\Commands\RelayCommand.cs" />
-    <Compile Include="Core\EnityModels\Coefficient.cs" />
-    <Compile Include="Core\EnityModels\Executors.cs" />
-    <Compile Include="Core\EnityModels\ExecutorStatus.cs" />
-    <Compile Include="Core\EnityModels\Group.cs" />
-    <Compile Include="Core\EnityModels\Manager.cs" />
-    <Compile Include="Core\EnityModels\Models.cs" />
-    <Compile Include="Core\EnityModels\NatureOfWork.cs" />
-    <Compile Include="Core\EnityModels\Person.cs" />
-    <Compile Include="Core\EnityModels\Quest.cs" />
-    <Compile Include="Core\EnityModels\QuestStatus.cs" />
-    <Compile Include="Core\EnityModels\Salary.cs" />
-    <Compile Include="Core\EnityModels\sysdiagrams.cs" />
+    <Compile Include="Core\EntityModels\Coefficient.cs" />
+    <Compile Include="Core\EntityModels\EntityContext.cs" />
+    <Compile Include="Core\EntityModels\Executors.cs" />
+    <Compile Include="Core\EntityModels\ExecutorStatus.cs" />
+    <Compile Include="Core\EntityModels\Group.cs" />
+    <Compile Include="Core\EntityModels\Manager.cs" />
+    <Compile Include="Core\EntityModels\NatureOfWork.cs" />
+    <Compile Include="Core\EntityModels\Person.cs" />
+    <Compile Include="Core\EntityModels\Quest.cs" />
+    <Compile Include="Core\EntityModels\QuestStatus.cs" />
+    <Compile Include="Core\EntityModels\Salary.cs" />
     <Compile Include="Core\Enums\Role.cs" />
     <Compile Include="Core\Singleton.cs" />
     <Compile Include="Core\UserModelSingleton.cs" />
@@ -93,13 +92,19 @@
     <Compile Include="Core\ValidationModel\Validator.cs" />
     <Compile Include="Model\CoefficientModel.cs" />
     <Compile Include="Model\ExecutorModel.cs" />
+    <Compile Include="Model\GroupModel.cs" />
+    <Compile Include="Model\TaskModel.cs" />
     <Compile Include="ViewModel\CoefficientViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="ViewModel\TaskViewModel.cs" />
     <Compile Include="View\ManagerView\EditWindow.xaml.cs">
       <DependentUpon>EditWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ManagerView\ManagerWindow.xaml.cs">
       <DependentUpon>ManagerWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TaskView\TaskWindow.xaml.cs">
+      <DependentUpon>TaskWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Core\ResourceDictionaries\MainDictionary.xaml">
       <SubType>Designer</SubType>
@@ -126,6 +131,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ManagerView\ManagerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TaskView\TaskWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

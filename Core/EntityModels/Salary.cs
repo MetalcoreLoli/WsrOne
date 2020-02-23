@@ -1,4 +1,4 @@
-namespace Wsr1.Core.EnityModels
+namespace Wsr1.Core.EntityModels
 {
     using System;
     using System.Collections.Generic;
@@ -6,26 +6,20 @@ namespace Wsr1.Core.EnityModels
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Coefficient")]
-    public partial class Coefficient
+    [Table("Salary")]
+    public partial class Salary
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Coefficient()
+        public Salary()
         {
             Manager = new HashSet<Manager>();
         }
 
-        public decimal CoefficientAnalis { get; set; }
+        public decimal JuniorMin { get; set; }
 
-        public decimal CoefficientInstall { get; set; }
+        public decimal MiddleMin { get; set; }
 
-        public decimal CoefficientService { get; set; }
-
-        public decimal CoefficientTime { get; set; }
-
-        public decimal CoefficientDifficult { get; set; }
-
-        public decimal CoefficientMoney { get; set; }
+        public decimal SeniorMin { get; set; }
 
         public int Id { get; set; }
 

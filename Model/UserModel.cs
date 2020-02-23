@@ -7,8 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
 using Wsr1.Core.ValidationModel.Attributes;
-using Wsr1.Core.EnityModels;
 using Wsr1.Core.Enums;
+using Wsr1.Core.EntityModels;
 
 namespace Wsr1.Model
 {
@@ -97,7 +97,7 @@ namespace Wsr1.Model
             }
         }
 
-        public UserModel CreateFromPerson(Person person)
+        public virtual UserModel CreateFromPerson(Person person)
         {
             Id = person.Id;
             FirstName = person.FirstName;

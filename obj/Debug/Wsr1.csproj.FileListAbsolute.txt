@@ -30,3 +30,5 @@ D:\Projects\CSharp\WPF\Wsr1\bin\Debug\System.Windows.Interactivity.xml
 D:\Projects\CSharp\WPF\Wsr1\bin\Debug\ru\EntityFramework.SqlServer.resources.dll
 D:\Projects\CSharp\WPF\Wsr1\obj\Debug\View\ManagerView\EditWindow.g.cs
 D:\Projects\CSharp\WPF\Wsr1\obj\Debug\View\ManagerView\EditWindow.baml
+D:\Projects\CSharp\WPF\Wsr1\obj\Debug\View\TaskView\TaskWindow.g.cs
+D:\Projects\CSharp\WPF\Wsr1\obj\Debug\View\TaskView\TaskWindow.baml

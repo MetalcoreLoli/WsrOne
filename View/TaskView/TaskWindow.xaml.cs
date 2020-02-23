@@ -11,21 +11,18 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Wsr1.Core;
 
-namespace Wsr1.View.ManagerView
+namespace Wsr1.View.TaskView
 {
     /// <summary>
-    /// Логика взаимодействия для ManagerWindow.xaml
+    /// Логика взаимодействия для TaskWindow.xaml
     /// </summary>
-    public partial class ManagerWindow : Window
+    public partial class TaskWindow : Window
     {
-        public ManagerWindow()
+        public TaskWindow()
         {
             InitializeComponent();
-            MessageBox.Show("Hello, " + UserModelSingleton.Instance().FirstName);
-            DataContext = coeffVM = Singleton<ViewModel.CoefficientViewModel>.Instance();
-            
+            DataContext = taskVM = new ViewModel.TaskViewModel();
         }
     }
 }

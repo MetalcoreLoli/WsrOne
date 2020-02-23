@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Wsr1.Core;
-using Wsr1.Core.EnityModels;
+using Wsr1.Core.EntityModels;
 using Wsr1.Core.ValidationModel.Attributes;
 
 namespace Wsr1.Model
@@ -150,10 +151,10 @@ namespace Wsr1.Model
             using (var con = DataBaseConnectionContext.GetContext())
             {
                 int id = UserModelSingleton.Instance().Id;
-                int salaryId = (int)con.Manager.FirstOrDefault(m => m.Id == id).SalaryId;
+                con.Manager.Load();
+                int salaryId = (int)con.Manager.Local.FirstOrDefault(m => m.Id == id).IdSalary;
                 Id = coefficient.Id;
-                IdManager = con.Manager.Where(m => m.CoefficientId == coefficient.Id).Select(m => m.Id).First();
-                
+                IdManager = con.Manager.Where(m => m.IdCoefficient == coefficient.Id).Select(m => m.Id).First();
                 CoefficientAnalis = coefficient.CoefficientAnalis;
                 CoefficientDifficult = coefficient.CoefficientDifficult;
                 CoefficientInstall = coefficient.CoefficientInstall;

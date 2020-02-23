@@ -1,14 +1,14 @@
-namespace Wsr1.Core.EnityModels
+namespace Wsr1.Core.EntityModels
 {
     using System;
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
 
-    public partial class Models : DbContext
+    public partial class EntityContext : DbContext
     {
-        public Models()
-            : base("name=EntityDataContext")
+        public EntityContext()
+            : base("name=EntityContext")
         {
         }
 
@@ -22,35 +22,13 @@ namespace Wsr1.Core.EnityModels
         public virtual DbSet<Quest> Quest { get; set; }
         public virtual DbSet<QuestStatus> QuestStatus { get; set; }
         public virtual DbSet<Salary> Salary { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Coefficient>()
-                .Property(e => e.CoefficientAnalis)
-                .HasPrecision(18, 0);
-
-            modelBuilder.Entity<Coefficient>()
-                .Property(e => e.CoefficientInstall)
-                .HasPrecision(18, 0);
-
-            modelBuilder.Entity<Coefficient>()
-                .Property(e => e.CoefficientService)
-                .HasPrecision(18, 0);
-
-            modelBuilder.Entity<Coefficient>()
-                .Property(e => e.CoefficientTime)
-                .HasPrecision(18, 0);
-
-            modelBuilder.Entity<Coefficient>()
-                .Property(e => e.CoefficientDifficult)
-                .HasPrecision(18, 0);
-
-            modelBuilder.Entity<Coefficient>()
-                .Property(e => e.CoefficientMoney)
-                .HasPrecision(18, 0);
-
-            
+                .HasMany(e => e.Manager)
+                .WithOptional(e => e.Coefficient)
+                .HasForeignKey(e => e.IdCoefficient);
 
             modelBuilder.Entity<Executors>()
                 .HasMany(e => e.Quest)
@@ -89,8 +67,9 @@ namespace Wsr1.Core.EnityModels
 
             modelBuilder.Entity<Person>()
                 .HasMany(e => e.Manager)
-                .WithOptional(e => e.Person)
-                .HasForeignKey(e => e.IdPerson);
+                .WithRequired(e => e.Person)
+                .HasForeignKey(e => e.IdPerson)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<QuestStatus>()
                 .HasMany(e => e.Quest)
@@ -109,6 +88,11 @@ namespace Wsr1.Core.EnityModels
             modelBuilder.Entity<Salary>()
                 .Property(e => e.SeniorMin)
                 .HasPrecision(18, 0);
+
+            modelBuilder.Entity<Salary>()
+                .HasMany(e => e.Manager)
+                .WithOptional(e => e.Salary)
+                .HasForeignKey(e => e.IdSalary);
         }
     }
 }

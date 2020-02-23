@@ -1,4 +1,4 @@
-namespace Wsr1.Core.EnityModels
+namespace Wsr1.Core.EntityModels
 {
     using System;
     using System.Collections.Generic;
@@ -6,21 +6,26 @@ namespace Wsr1.Core.EnityModels
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class ExecutorStatus
+    [Table("Group")]
+    public partial class Group
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ExecutorStatus()
+        public Group()
         {
             Executors = new HashSet<Executors>();
         }
 
         public int Id { get; set; }
 
+        public int IdManager { get; set; }
+
         [Required]
         [StringLength(255)]
-        public string Value { get; set; }
+        public string Name { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Executors> Executors { get; set; }
+
+        public virtual Manager Manager { get; set; }
     }
 }

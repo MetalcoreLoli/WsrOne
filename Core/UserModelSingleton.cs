@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Wsr1.Core.EnityModels;
+using Wsr1.Core.EntityModels;
 using Wsr1.Model;
 
 namespace Wsr1.Core

@@ -1,4 +1,4 @@
-namespace Wsr1.Core.EnityModels
+namespace Wsr1.Core.EntityModels
 {
     using System;
     using System.Collections.Generic;
@@ -6,30 +6,22 @@ namespace Wsr1.Core.EnityModels
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Manager")]
-    public partial class Manager
+    [Table("NatureOfWork")]
+    public partial class NatureOfWork
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Manager()
+        public NatureOfWork()
         {
-            Group = new HashSet<Group>();
+            Quest = new HashSet<Quest>();
         }
 
         public int Id { get; set; }
 
-        public int? IdPerson { get; set; }
-
-        public int? CoefficientId { get; set; }
-
-        public int? SalaryId { get; set; }
-
-        public virtual Coefficient Coefficient { get; set; }
+        [Required]
+        [StringLength(255)]
+        public string Value { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Group> Group { get; set; }
-
-        public virtual Person Person { get; set; }
-
-        public virtual Salary Salary { get; set; }
+        public virtual ICollection<Quest> Quest { get; set; }
     }
 }

@@ -37,6 +37,8 @@
                     Text="kukleva"
                     Style="{StaticResource MainStyleOfTextBox}"
                     />
+                <TextBlock
+                            Style="{StaticResource LineBox}"/>
             </StackPanel>
             <StackPanel
                 Orientation="Horizontal">
@@ -53,6 +55,8 @@
                     Password="123123"
                     VerticalContentAlignment="Center"
                     />
+                <TextBlock
+                    Style="{StaticResource LineBox}"/>
             </StackPanel>
         </StackPanel>
         <Grid

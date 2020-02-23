@@ -35,4 +35,24 @@
         <Setter Property="Control.FontFamily" Value="Tahoma"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
     </Style>
+
+    <Style
+        TargetType="ComboBox"
+        x:Key="MainStyleOfComboBox">
+        <Setter Property="Background" Value="#FF00AAFF"/>
+        <Setter Property="Height" Value="45"/>
+        <Setter Property="Width" Value="175"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+
+    <Style
+        TargetType="TextBlock"
+        x:Key="LineBox">
+        <Setter Property="Background" Value="#FF00AAFF"/>
+        <Setter Property="Foreground" Value="#FFFFFFFF"/>
+        <Setter Property="Height" Value="1.5"/>
+    </Style>
 </ResourceDictionary>

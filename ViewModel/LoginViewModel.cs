@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Wsr1.Core;
 using Wsr1.Core.Commands;
 using Wsr1.Core.DialogServices;
-using Wsr1.Core.EnityModels;
+using Wsr1.Core.EntityModels;
 using Wsr1.View.ManagerView;
 
 namespace Wsr1.ViewModel

@@ -12,6 +12,7 @@ using Wsr1.Core.ValidationModel;
 using System.Windows;
 using Wsr1.Core.DialogServices;
 using Wsr1.View.ManagerView;
+using Wsr1.View.TaskView;
 
 namespace Wsr1.ViewModel
 {
@@ -24,7 +25,8 @@ namespace Wsr1.ViewModel
 
         RelayCommand _editCommand;
         RelayCommand _acceptCommand;
-
+        RelayCommand _closeCommand;
+        RelayCommand _openTaskList;
 
         public CoefficientModel SelecteModel
         {
@@ -34,6 +36,46 @@ namespace Wsr1.ViewModel
                 _selectedModel = value;
                 OnPropertyChanged(nameof(SelecteModel));
             }
+        }
+
+        public RelayCommand OpenTaskListCommand
+        {
+            get => _openTaskList ?? (_openTaskList = new RelayCommand(obj =>
+            {
+                try
+                {
+                    if (obj != null)
+                    {
+                        var win = obj as ManagerWindow;
+                        win.Hide();
+                        new TaskWindow().ShowDialog();
+                        win.Show();
+                    }
+                    else
+                        throw new NullReferenceException();
+                }
+                catch (Exception ex)
+                {
+                    dialogService.ShowErrorMessage(ex.Message);
+                }
+            }));
+        }
+        public RelayCommand CloseCommand
+        {
+            get => _closeCommand ?? (_closeCommand = new RelayCommand(obj => 
+            {
+                try
+                {
+                    if (obj != null)
+                        (obj as Window).Close();
+                    else
+                        throw new NullReferenceException();
+                }
+                catch (Exception ex)
+                {
+                    dialogService.ShowErrorMessage(ex.Message);
+                }    
+            }));
         }
 
         public RelayCommand EditCommand
@@ -78,7 +120,7 @@ namespace Wsr1.ViewModel
                 {
                     if (obj != null)
                     {
-                        var editWindow = obj as  EditWindow;
+                        var editWindow = obj as EditWindow;
                         using (var context = Core.DataBaseConnectionContext.GetContext())
                         {
                             int manager_id = UserModelSingleton.Instance().Id;
@@ -96,6 +138,8 @@ namespace Wsr1.ViewModel
                             salary.MiddleMin = decimal.Parse(editWindow.MiddleBox.Text);
 
                             context.SaveChanges();
+                            editWindow.DialogResult = true;
+                            dialogService.ShowMessage("Коеффициенты обновлены");
                         }
                     }
                     else
@@ -114,6 +158,7 @@ namespace Wsr1.ViewModel
         {
             dialogService = new MessageBoxService();
             Coefficients = new ObservableCollection<CoefficientModel>(Init().Where(c => c.IdManager == UserModelSingleton.Instance().Id));
+            //Coefficients.CollectionChanged += Coefficients_CollectionChanged;
         }
 
         //this method for init list
@@ -122,7 +167,6 @@ namespace Wsr1.ViewModel
             using (var con =  DataBaseConnectionContext.GetContext())
                 foreach (var coenff in con.Coefficient.AsParallel())
                     yield return new CoefficientModel().CreateFrom(coenff);
-                
         }
     }
 }

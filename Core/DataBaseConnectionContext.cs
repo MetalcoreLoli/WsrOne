@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Wsr1.Core.EnityModels;
+﻿using Wsr1.Core.EntityModels;
 
 namespace Wsr1.Core
 {
     public class DataBaseConnectionContext
     {
-        static Models context;
-        public static Models GetContext()
+        public static EntityModels.EntityContext GetContext()
         {
-            return new Models();
+            return new EntityContext();
         }
     }
 }
