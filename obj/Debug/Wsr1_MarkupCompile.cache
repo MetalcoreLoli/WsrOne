@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\Projects\CSharp\WPF\Wsr1\App.xaml
-5-1627923465
+7-1190924961
 
-39-1858959465
+41-950285615
 20-1485400388
-Core\ResourceDictionaries\MainDictionary.xaml;View\MainWindow.xaml;View\ManagerView\EditWindow.xaml;View\ManagerView\ManagerWindow.xaml;View\TaskView\TaskWindow.xaml;
+Core\ResourceDictionaries\MainDictionary.xaml;View\MainWindow.xaml;View\ManagerView\EditWindow.xaml;View\ManagerView\ManagerWindow.xaml;View\TaskView\AddTaskWindow.xaml;View\TaskView\EditTaskWindow.xaml;View\TaskView\TaskWindow.xaml;
 
 False
 

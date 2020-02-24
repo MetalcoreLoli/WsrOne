@@ -10,6 +10,7 @@ using Wsr1.Core.Commands;
 using Wsr1.Core.DialogServices;
 using Wsr1.Core.EntityModels;
 using Wsr1.Model;
+using Wsr1.View.TaskView;
 
 namespace Wsr1.ViewModel
 {
@@ -24,6 +25,8 @@ namespace Wsr1.ViewModel
 
         private IDialogService _dialogService;
         private TaskModel _selectedModel;
+
+        private ExecutorModel _selectedExecutor;
         #endregion
 
         #region PublicMembers
@@ -32,7 +35,9 @@ namespace Wsr1.ViewModel
         public ObservableCollection<String> SecondNames { get; set; }
         public ObservableCollection<String> LastNames   { get; set; }
         public ObservableCollection<String> Statuses   { get; set; }
-
+        public ObservableCollection<String> NatureOfWorks { get; set; }
+        public ObservableCollection<ExecutorModel> Executors { get; set; }
+        public ObservableCollection<String> Groups { get; set; }
 
         public TaskModel SelectedModel
         {
@@ -41,6 +46,16 @@ namespace Wsr1.ViewModel
             {
                 _selectedModel = value;
                 OnPropertyChanged(nameof(SelectedModel));
+            }
+        }
+
+        public ExecutorModel SelectedExecutor
+        {
+            get => _selectedExecutor;
+            set
+            {
+                _selectedExecutor = value;
+                OnPropertyChanged(nameof(SelectedExecutor));
             }
         }
 
@@ -70,8 +85,42 @@ namespace Wsr1.ViewModel
                 {
                     if (obj != null)
                     {
-                        throw new NotImplementedException("TODO:");
-                    }
+                        var editWin = new EditTaskWindow(this);
+                        editWin.DifficultBox.Text = SelectedModel.Difficult.ToString();
+                        editWin.NatureOfWorkBox.Text = SelectedModel.NatureOfWork;
+                        editWin.TitleBox.Text = ":C";
+                        editWin.StatusBox.Text = SelectedModel.Status;
+                        editWin.DateTimeBox.Text = SelectedModel.Time.ToString();
+                        editWin.GroupBox.Text = SelectedModel.Executor.Group.Name;
+                        editWin.ExecutorInGroup.ItemsSource = Executors.Where(ex => ex.Group.Name.Equals(SelectedModel.Executor.Group.Name));
+
+                        editWin.GroupBox.SelectionChanged += (s, evArg) => 
+                        {
+                            editWin.ExecutorInGroup.ItemsSource = Executors.Where(ex => ex.Group.Name.Equals(editWin.GroupBox.SelectedItem as string)).Distinct();
+                        };
+
+                        editWin.BackButton.Click += (s, evArg) => editWin.Close();
+                        
+                        editWin.DoneButton.Click += (s, evArg) => 
+                        {
+                            using (var context = new EntityContext())
+                            {
+                                var quest = context.Quest.FirstOrDefault(q => q.Id.Equals(SelectedModel.Id));
+                                string status = editWin.StatusBox.SelectedItem as string;
+                                string natureOfWork = editWin.NatureOfWorkBox.SelectedItem as string;
+                                if (quest != null)
+                                {
+                                    quest.Title = editWin.TitleBox.Text;
+                                    quest.IdStatus = context.QuestStatus.FirstOrDefault(st => st.Value.Equals(status)).Id;
+                                    quest.IdNatureOfWork = context.NatureOfWork.FirstOrDefault(nt => nt.Value.Equals(natureOfWork)).Id;
+                                    quest.Difficult = editWin.DifficultBox.Text;
+                                }
+                                context.SaveChanges();
+                            }
+                        };
+                        editWin.ShowDialog();
+
+                   }
                 }
                 catch (Exception ex)
                 {
@@ -86,10 +135,47 @@ namespace Wsr1.ViewModel
             {
                 try
                 {
-                    if (obj != null)
+                    var addwin = new AddTaskWindow(this);
+
+                    addwin.DoneButton.Click += (s, evArg) =>
                     {
-                        throw new NotImplementedException("TODO:");
-                    }
+                        using (var context = new EntityContext())
+                        {
+                            var quest = new Quest();
+                            string status = addwin.StatusBox.SelectedItem as string;
+                            string natureOfWork = addwin.NatureOfWorkBox.SelectedItem as string;
+                            context.Executors.Load();
+                            if (quest != null)
+                            {
+                                quest.Title = addwin.TitleBox.Text;
+                                quest.IdStatus = context.QuestStatus.FirstOrDefault(st => st.Value.Equals(status)).Id;
+                                quest.IdNatureOfWork = context.NatureOfWork.FirstOrDefault(nt => nt.Value.Equals(natureOfWork)).Id;
+                                quest.Difficult = addwin.DifficultBox.Text;
+                                quest.ExecutorId = context.Executors.FirstOrDefault(ex => ex.Person.FirstName.Equals(SelectedExecutor.FirstName) && ex.Person.SecondName.Equals(SelectedExecutor.SecondName) && ex.Person.LastName.Equals(SelectedExecutor.LastName)).Id;
+                            }
+                            context.Quest.Add(quest);
+                            context.SaveChanges();
+                            _dialogService.ShowMessage("Задача Успешо создана");
+
+                        }
+                        using (var context = new EntityContext())
+                        {
+                            context.Quest.Load();
+                            var quest = context.Quest.Local.Last();
+                            var person = quest.Executors.Person;
+                            Tasks.Add(new TaskModel
+                            {
+                                Id = quest.Id,
+                                Difficult = Int32.Parse(quest.Difficult),
+                                NatureOfWork = quest.NatureOfWork.Value,
+                                Status = quest.QuestStatus.Value,
+                                Executor = new ExecutorModel().CreateFromPerson(person) as ExecutorModel
+                            });
+                        }
+                    };
+                    addwin.ShowDialog();
+
+
                 }
                 catch (Exception ex)
                 {
@@ -106,8 +192,19 @@ namespace Wsr1.ViewModel
                 {
                     if (obj != null)
                     {
-                        throw new NotImplementedException("TODO:");
+                        TaskModel model = obj as TaskModel;
+                        using (var context = new EntityContext())
+                        {
+                            var modelForDel = context.Quest.Find(model.Id);
+                            context.Quest.Remove(modelForDel);
+                            context.SaveChanges();
+                            _dialogService.ShowMessage("Удаление завершено");
+                            Tasks.Remove(model);
+                        }
                     }
+                    else
+                        throw new NotImplementedException("Перед удалением выделите нужную строку !!!");
+
                 }
                 catch (Exception ex)
                 {
@@ -129,10 +226,13 @@ namespace Wsr1.ViewModel
             FistNames   = new ObservableCollection<String>(list.Select(t => t.Executor.FirstName).Distinct());
             SecondNames = new ObservableCollection<String>(list.Select(t => t.Executor.SecondName).Distinct());
             LastNames   = new ObservableCollection<String>(list.Select(t => t.Executor.LastName).Distinct());
+            Executors   = new ObservableCollection<ExecutorModel>(list.Select(t => t.Executor).Where(ex => ex.Group.ManagerId.Equals(id)));
+            
             using (var context = new EntityContext())
             {
-                context.QuestStatus.Load();
-                Statuses = new ObservableCollection<String>(context.QuestStatus.Local.Select(s => s.Value));
+                Statuses = new ObservableCollection<String>(context.QuestStatus.Select(s => s.Value));
+                NatureOfWorks = new ObservableCollection<String>(context.NatureOfWork.Select(s => s.Value));
+                Groups = new ObservableCollection<String>(context.Group.Where(gr => gr.IdManager.Equals(id)).Select(g => g.Name));
             }
         }
         #endregion

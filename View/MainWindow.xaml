@@ -37,10 +37,12 @@
                     Text="kukleva"
                     Style="{StaticResource MainStyleOfTextBox}"
                     />
-                <TextBlock
-                            Style="{StaticResource LineBox}"/>
+               
             </StackPanel>
+            <TextBlock
+                    Style="{StaticResource LineBox}"/>
             <StackPanel
+                Margin="0,10,0,0"
                 Orientation="Horizontal">
                 <Label 
                     Style="{StaticResource MainStyleOfLable}"
@@ -53,11 +55,12 @@
                     Width="175"
                     FontSize="14" 
                     Password="123123"
+                    BorderThickness="0"
                     VerticalContentAlignment="Center"
                     />
-                <TextBlock
-                    Style="{StaticResource LineBox}"/>
             </StackPanel>
+            <TextBlock
+                    Style="{StaticResource LineBox}"/>
         </StackPanel>
         <Grid
             Grid.Row="2">

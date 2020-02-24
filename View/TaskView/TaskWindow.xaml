@@ -35,7 +35,9 @@
                 Grid.Column="0"
                 IsReadOnly="True"
                 FontSize="14"
+                SelectionMode="Extended"
                 AutoGenerateColumns="False">
+               
                 <DataGrid.Columns>
                     <DataGridTextColumn
                         Header="Статус"
@@ -74,6 +76,13 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDoubleClick">
+                        <i:InvokeCommandAction
+                            Command="{Binding Source={x:Reference Name=taskVM}, Path=EditCommand}"
+                            CommandParameter="{Binding Source={x:Reference Name=taskVM},Path=SelectedModel}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
             </DataGrid>
 
             <StackPanel
@@ -165,6 +174,7 @@
                     <i:EventTrigger EventName="Click">
                         <i:InvokeCommandAction
                             Command="{Binding EditCommand}"
+                            CommandParameter="{Binding SelectedModel}"
                             />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
@@ -188,7 +198,8 @@
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
                         <i:InvokeCommandAction
-                              Command="{Binding DeleteCommand}"/>
+                              Command="{Binding DeleteCommand}"
+                              CommandParameter="{Binding SelectedModel}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>

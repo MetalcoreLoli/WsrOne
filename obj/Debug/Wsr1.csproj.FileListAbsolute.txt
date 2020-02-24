@@ -32,3 +32,7 @@ D:\Projects\CSharp\WPF\Wsr1\obj\Debug\View\ManagerView\EditWindow.g.cs
 D:\Projects\CSharp\WPF\Wsr1\obj\Debug\View\ManagerView\EditWindow.baml
 D:\Projects\CSharp\WPF\Wsr1\obj\Debug\View\TaskView\TaskWindow.g.cs
 D:\Projects\CSharp\WPF\Wsr1\obj\Debug\View\TaskView\TaskWindow.baml
+D:\Projects\CSharp\WPF\Wsr1\obj\Debug\View\TaskView\EditTaskWindow.g.cs
+D:\Projects\CSharp\WPF\Wsr1\obj\Debug\View\TaskView\EditTaskWindow.baml
+D:\Projects\CSharp\WPF\Wsr1\obj\Debug\View\TaskView\AddTaskWindow.g.cs
+D:\Projects\CSharp\WPF\Wsr1\obj\Debug\View\TaskView\AddTaskWindow.baml
