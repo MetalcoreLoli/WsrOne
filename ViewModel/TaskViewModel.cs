@@ -23,6 +23,9 @@ namespace Wsr1.ViewModel
         private RelayCommand _addCommand;
         private RelayCommand _delCommand;
 
+        private RelayCommand _statusFilterCommand;
+        private RelayCommand _executorFilterCommand;
+
         private IDialogService _dialogService;
         private TaskModel _selectedModel;
 
@@ -30,11 +33,11 @@ namespace Wsr1.ViewModel
         #endregion
 
         #region PublicMembers
-        public ObservableCollection<TaskModel> Tasks    { get; set; }
-        public ObservableCollection<String> FistNames   { get; set; }
+        public ObservableCollection<TaskModel> Tasks { get; set; }
+        public ObservableCollection<String> FistNames { get; set; }
         public ObservableCollection<String> SecondNames { get; set; }
-        public ObservableCollection<String> LastNames   { get; set; }
-        public ObservableCollection<String> Statuses   { get; set; }
+        public ObservableCollection<String> LastNames { get; set; }
+        public ObservableCollection<String> Statuses { get; set; }
         public ObservableCollection<String> NatureOfWorks { get; set; }
         public ObservableCollection<ExecutorModel> Executors { get; set; }
         public ObservableCollection<String> Groups { get; set; }
@@ -67,7 +70,13 @@ namespace Wsr1.ViewModel
                 {
                     if (obj != null)
                     {
-                        throw new NotImplementedException("TODO:");
+                        var win = obj as TaskWindow;
+                        win.StatusFilterBox.Text      = "";
+                        win.FirstNameFillterBox.Text  = "";
+                        win.SecondNameFillterBox.Text = "";
+                        win.LastNameFillterBox.Text   = "";
+                        win.TasksDataGrid.ItemsSource = Tasks;
+                        _dialogService.ShowMessage("Фильтры сброщены");
                     }
                 }
                 catch (Exception ex)
@@ -94,14 +103,14 @@ namespace Wsr1.ViewModel
                         editWin.GroupBox.Text = SelectedModel.Executor.Group.Name;
                         editWin.ExecutorInGroup.ItemsSource = Executors.Where(ex => ex.Group.Name.Equals(SelectedModel.Executor.Group.Name));
 
-                        editWin.GroupBox.SelectionChanged += (s, evArg) => 
+                        editWin.GroupBox.SelectionChanged += (s, evArg) =>
                         {
                             editWin.ExecutorInGroup.ItemsSource = Executors.Where(ex => ex.Group.Name.Equals(editWin.GroupBox.SelectedItem as string)).Distinct();
                         };
 
                         editWin.BackButton.Click += (s, evArg) => editWin.Close();
-                        
-                        editWin.DoneButton.Click += (s, evArg) => 
+
+                        editWin.DoneButton.Click += (s, evArg) =>
                         {
                             using (var context = new EntityContext())
                             {
@@ -120,7 +129,7 @@ namespace Wsr1.ViewModel
                         };
                         editWin.ShowDialog();
 
-                   }
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -212,6 +221,68 @@ namespace Wsr1.ViewModel
                 }
             }));
         }
+
+
+        public RelayCommand StatusFilterCommand
+        {
+            get => _statusFilterCommand ?? (_statusFilterCommand = new RelayCommand(obj =>
+            {
+                try
+                {
+                    if (obj != null)
+                    {
+                        var win = obj as TaskWindow;
+                        string status = win.StatusFilterBox.SelectedItem as string;
+                        win.TasksDataGrid.ItemsSource = new ObservableCollection<TaskModel>(Tasks.Where(ts => ts.Status.Equals(status)));
+                        _dialogService.ShowMessage($"Задачи отфильтованны по статусу {status}");
+                    }
+                    else
+                        throw new Exception("");
+
+                }
+                catch (Exception ex)
+                {
+                    _dialogService.ShowErrorMessage(ex.Message);
+                }
+               
+            }));
+        }
+
+        public RelayCommand ExecutorFilterCommand
+        {
+            get => _executorFilterCommand ?? (_executorFilterCommand = new RelayCommand(obj =>
+            {
+                try
+                {
+                    if (obj != null)
+                    {
+                        var win = obj as TaskWindow;
+                        string firstName    = win.FirstNameFillterBox.SelectedItem  as string;
+                        string secondName   = win.SecondNameFillterBox.SelectedItem as string;
+                        string lastName     = win.LastNameFillterBox.SelectedItem   as string;
+                        string status       = win.StatusFilterBox.SelectedItem      as string; 
+                        win.TasksDataGrid.ItemsSource = new ObservableCollection<TaskModel>
+                        (
+                            Tasks.Where(ts =>   ts.Executor.FirstName   .Equals(firstName)    ||
+                                                ts.Executor.SecondName  .Equals(secondName)   || 
+                                                ts.Executor.LastName    .Equals(lastName)     ||
+                                                ts.Status               .Equals(status)
+                                                ));
+                        _dialogService.ShowMessage($"Задачи отфильтованны по ФИО");
+                    }
+                    else
+                        throw new Exception("");
+
+                }
+                catch (Exception ex)
+                {
+                    _dialogService.ShowErrorMessage(ex.Message);
+                }
+
+            }));
+        }
+
+
         #endregion
 
         #region Constructors
@@ -222,7 +293,6 @@ namespace Wsr1.ViewModel
             Int32 id = UserModelSingleton.Instance().Id;
             var list = Init().Where(ts => ts.Executor.Group.ManagerId.Equals(id));
             Tasks       = new ObservableCollection<TaskModel>(list);
-            
             FistNames   = new ObservableCollection<String>(list.Select(t => t.Executor.FirstName).Distinct());
             SecondNames = new ObservableCollection<String>(list.Select(t => t.Executor.SecondName).Distinct());
             LastNames   = new ObservableCollection<String>(list.Select(t => t.Executor.LastName).Distinct());
@@ -230,9 +300,9 @@ namespace Wsr1.ViewModel
             
             using (var context = new EntityContext())
             {
-                Statuses = new ObservableCollection<String>(context.QuestStatus.Select(s => s.Value));
-                NatureOfWorks = new ObservableCollection<String>(context.NatureOfWork.Select(s => s.Value));
-                Groups = new ObservableCollection<String>(context.Group.Where(gr => gr.IdManager.Equals(id)).Select(g => g.Name));
+                Statuses        = new ObservableCollection<String>(context.QuestStatus.Select(s => s.Value));
+                NatureOfWorks   = new ObservableCollection<String>(context.NatureOfWork.Select(s => s.Value));
+                Groups          = new ObservableCollection<String>(context.Group.Where(gr => gr.IdManager.Equals(id)).Select(g => g.Name));
             }
         }
         #endregion

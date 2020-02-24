@@ -30,14 +30,15 @@
                 <ColumnDefinition Width="185"/>
             </Grid.ColumnDefinitions>
             <DataGrid
+                x:Name="TasksDataGrid"
                 ItemsSource="{Binding Tasks}"
                 SelectedItem="{Binding SelectedModel}"
                 Grid.Column="0"
                 IsReadOnly="True"
                 FontSize="14"
                 SelectionMode="Extended"
-                AutoGenerateColumns="False">
-               
+                AutoGenerateColumns="False"
+                >
                 <DataGrid.Columns>
                     <DataGridTextColumn
                         Header="Статус"
@@ -99,8 +100,19 @@
                             Content="По Статусу"
                             Style="{StaticResource MainStyleOfLable}"/>
                         <ComboBox
+                            IsReadOnly="False"
+                            IsEditable="True"
                             ItemsSource="{Binding Statuses}"
-                            Style="{StaticResource MainStyleOfComboBox}"/>
+                            x:Name="StatusFilterBox"
+                            Style="{StaticResource MainStyleOfComboBox}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction
+                                        Command="{Binding StatusFilterCommand}"
+                                        CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ComboBox>
                         <TextBlock
                             Style="{StaticResource LineBox}"/>
                     </StackPanel>
@@ -113,8 +125,18 @@
                             Content="По Имяни"
                             Style="{StaticResource MainStyleOfLable}"/>
                         <ComboBox
+                            x:Name="FirstNameFillterBox"
+                            IsEditable="True"
                             ItemsSource="{Binding FistNames}"
-                            Style="{StaticResource MainStyleOfComboBox}"/>
+                            Style="{StaticResource MainStyleOfComboBox}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction
+                                        Command="{Binding ExecutorFilterCommand}"
+                                        CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ComboBox>
                         <TextBlock
                             Style="{StaticResource LineBox}"/>
                         
@@ -122,8 +144,18 @@
                             Content="По Фамилии"
                             Style="{StaticResource MainStyleOfLable}"/>
                         <ComboBox
+                            x:Name="SecondNameFillterBox"
+                            IsEditable="True"
                             ItemsSource="{Binding SecondNames}"
-                            Style="{StaticResource MainStyleOfComboBox}"/>
+                            Style="{StaticResource MainStyleOfComboBox}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction
+                                        Command="{Binding ExecutorFilterCommand}"
+                                        CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ComboBox>
                         <TextBlock
                             Style="{StaticResource LineBox}"/>
                         
@@ -131,8 +163,18 @@
                             Content="По Отчеству"
                             Style="{StaticResource MainStyleOfLable}"/>
                         <ComboBox
+                            x:Name="LastNameFillterBox"
+                            IsEditable="True"
                             ItemsSource="{Binding LastNames}"
-                            Style="{StaticResource MainStyleOfComboBox}"/>
+                            Style="{StaticResource MainStyleOfComboBox}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction
+                                        Command="{Binding ExecutorFilterCommand}"
+                                        CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ComboBox>
                         <TextBlock
                             Style="{StaticResource LineBox}"/>
                     </StackPanel>
@@ -145,6 +187,7 @@
                                 <i:EventTrigger EventName="Click">
                                     <i:InvokeCommandAction
                                         Command="{Binding ClearCommand}"
+                                        CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}}"
                                         />
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
