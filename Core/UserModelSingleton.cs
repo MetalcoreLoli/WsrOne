@@ -8,14 +8,9 @@ using Wsr1.Model;
 
 namespace Wsr1.Core
 {
-    public class UserModelSingleton
+    public static class UserModelSingleton
     {
         static UserModel _instance;
-
-        public UserModelSingleton()
-        {
-            _instance = new UserModel();
-        }
 
         public static UserModel Instance()
         {

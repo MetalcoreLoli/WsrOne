@@ -62,20 +62,7 @@ namespace Wsr1.ViewModel
         }
         public RelayCommand CloseCommand
         {
-            get => _closeCommand ?? (_closeCommand = new RelayCommand(obj => 
-            {
-                try
-                {
-                    if (obj != null)
-                        (obj as Window).Close();
-                    else
-                        throw new NullReferenceException();
-                }
-                catch (Exception ex)
-                {
-                    dialogService.ShowErrorMessage(ex.Message);
-                }    
-            }));
+            get => _closeCommand ?? (_closeCommand = UserCommandManager.BackToUserMenuCommand);
         }
 
         public RelayCommand EditCommand
@@ -109,7 +96,7 @@ namespace Wsr1.ViewModel
                 {
                     dialogService.ShowErrorMessage(ex.Message);
                 }
-            }));
+            }, obj => UserModelSingleton.Instance().Role == Core.Enums.Role.Manager));
         }
 
         public RelayCommand AcceptCommand

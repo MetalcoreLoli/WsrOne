@@ -71,6 +71,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Core\AbstractBaseModel.cs" />
+    <Compile Include="Core\CommandManager.cs" />
     <Compile Include="Core\Commands\RelayCommand.cs" />
     <Compile Include="Core\EntityModels\Coefficient.cs" />
     <Compile Include="Core\EntityModels\EntityContext.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="ViewModel\CoefficientViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\TaskViewModel.cs" />
+    <Compile Include="ViewModel\UserMenuViewModel.cs" />
     <Compile Include="View\ManagerView\EditWindow.xaml.cs">
       <DependentUpon>EditWindow.xaml</DependentUpon>
     </Compile>
@@ -111,6 +113,9 @@
     </Compile>
     <Compile Include="View\TaskView\TaskWindow.xaml.cs">
       <DependentUpon>TaskWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserMenuWindow.xaml.cs">
+      <DependentUpon>UserMenuWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Core\ResourceDictionaries\MainDictionary.xaml">
       <SubType>Designer</SubType>
@@ -149,6 +154,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\TaskView\TaskWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserMenuWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

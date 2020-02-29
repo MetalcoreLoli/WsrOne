@@ -207,8 +207,16 @@
             <Button
                 Grid.Column="0"
                 Content="Назад"
-                Command="ApplicationCommands.Close"
-                Style="{StaticResource MainStyleOfButton}"/>
+                Style="{StaticResource MainStyleOfButton}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <i:InvokeCommandAction
+                            Command="{Binding BackCommand}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window, Mode=FindAncestor}}"
+                            />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
             <Button
                 Grid.Column="1"
                 Content="Редактровать"

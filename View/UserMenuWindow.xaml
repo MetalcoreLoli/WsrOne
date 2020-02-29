@@ -1,0 +1,66 @@
+﻿<Window x:Class="Wsr1.View.UserMenuWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"        
+        xmlns:local="clr-namespace:Wsr1.View"
+        xmlns:vm="clr-namespace:Wsr1.ViewModel"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d"
+        Title="Меню" Height="600" Width="400">
+    <Window.DataContext>
+        <vm:UserMenuViewModel
+            x:Name="userMenuVM"/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition/>
+            <RowDefinition Height="65"/>
+        </Grid.RowDefinitions>
+        <Image Source="../Core/Image/logo.png"/>
+        <StackPanel
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Grid.Row="1">
+            <Button
+                Content="Коeффициенты"
+                Style="{StaticResource MainStyleOfButton}">
+                <i:Interaction.Triggers >
+                    <i:EventTrigger EventName="Click">
+                        <i:InvokeCommandAction
+                            Command="{Binding CoeffCommand}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window, Mode=FindAncestor}}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
+            <Button
+                Margin="0, 10, 0, 0"
+                Content="Задачи"
+                Style="{StaticResource MainStyleOfButton}">
+                <i:Interaction.Triggers >
+                    <i:EventTrigger EventName="Click">
+                        <i:InvokeCommandAction
+                            Command="{Binding TaskCommand}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window, Mode=FindAncestor}}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
+        </StackPanel>
+        <Grid
+            Grid.Row="2">
+            <Button
+                Content="Назад"
+                Style="{StaticResource MainStyleOfButton}">
+                <i:Interaction.Triggers >
+                    <i:EventTrigger EventName="Click">
+                        <i:InvokeCommandAction
+                            Command="{Binding BackCommand}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window, Mode=FindAncestor}}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

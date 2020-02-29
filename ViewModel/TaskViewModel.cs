@@ -26,6 +26,8 @@ namespace Wsr1.ViewModel
         private RelayCommand _statusFilterCommand;
         private RelayCommand _executorFilterCommand;
 
+        private RelayCommand _backCommand;
+
         private IDialogService _dialogService;
         private TaskModel _selectedModel;
 
@@ -60,6 +62,12 @@ namespace Wsr1.ViewModel
                 _selectedExecutor = value;
                 OnPropertyChanged(nameof(SelectedExecutor));
             }
+        }
+
+
+        public RelayCommand BackCommand
+        {
+            get => _backCommand ?? (_backCommand = UserCommandManager.BackToUserMenuCommand);
         }
 
         public RelayCommand ClearCommand
@@ -199,20 +207,16 @@ namespace Wsr1.ViewModel
             {
                 try
                 {
-                    if (obj != null)
+                    _ = obj ?? throw new ArgumentNullException(paramName: nameof(obj), message: "Перед удалением выделите нужную строку !!!");
+                    TaskModel model = obj as TaskModel;
+                    using (var context = new EntityContext())
                     {
-                        TaskModel model = obj as TaskModel;
-                        using (var context = new EntityContext())
-                        {
-                            var modelForDel = context.Quest.Find(model.Id);
-                            context.Quest.Remove(modelForDel);
-                            context.SaveChanges();
-                            _dialogService.ShowMessage("Удаление завершено");
-                            Tasks.Remove(model);
-                        }
+                        var modelForDel = context.Quest.Find(model.Id);
+                        context.Quest.Remove(modelForDel);
+                        context.SaveChanges();
+                        _dialogService.ShowMessage("Удаление завершено");
+                        Tasks.Remove(model);
                     }
-                    else
-                        throw new NotImplementedException("Перед удалением выделите нужную строку !!!");
 
                 }
                 catch (Exception ex)
@@ -279,7 +283,7 @@ namespace Wsr1.ViewModel
                     _dialogService.ShowErrorMessage(ex.Message);
                 }
 
-            }));
+            }, obj => UserModelSingleton.Instance().Role == Core.Enums.Role.Manager));
         }
 
 

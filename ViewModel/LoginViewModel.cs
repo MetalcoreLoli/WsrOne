@@ -37,17 +37,9 @@ namespace Wsr1.ViewModel
                             throw new Exception("Неизвестный пользователь");
                         
                         UserModelSingleton.Instance().CreateFromPerson(user);
-                        switch (UserModelSingleton.Instance().Role)
-                        {
-                            case Core.Enums.Role.Manager:
-                                new ManagerWindow().Show();
-                                loginWindow.Close();
-                                break;
-                            case Core.Enums.Role.Executer:
-                                loginWindow.Close();
-                                break;
-                            default: throw new Exception("Неизвестный пользователь");
-                        }
+
+                        new View.UserMenuWindow().Show();
+                        loginWindow.Close();
                     }
                 }
                 catch (Exception ex)
