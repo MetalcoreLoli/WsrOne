@@ -21,7 +21,7 @@ namespace Wsr1.ViewModel
 
         private CoefficientModel _selectedModel;
 
-        private IDialogService dialogService;
+        private readonly IDialogService dialogService;
 
         RelayCommand _editCommand;
         RelayCommand _acceptCommand;

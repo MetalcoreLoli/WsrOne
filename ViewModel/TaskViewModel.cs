@@ -283,7 +283,18 @@ namespace Wsr1.ViewModel
                     _dialogService.ShowErrorMessage(ex.Message);
                 }
 
-            }, obj => UserModelSingleton.Instance().Role == Core.Enums.Role.Manager));
+            }, obj => 
+            {
+                bool isManager = UserModelSingleton.Instance().Role == Core.Enums.Role.Manager;
+
+                if (!isManager && obj is TaskWindow window)
+                {
+                    window.FirstNameFillterBox.IsEnabled    = false;
+                    window.SecondNameFillterBox.IsEnabled   = false;
+                    window.LastNameFillterBox.IsEnabled     = false;
+                }
+                return isManager;
+            }));
         }
 
 
@@ -295,8 +306,13 @@ namespace Wsr1.ViewModel
         {
             _dialogService = new MessageBoxService();
             Int32 id = UserModelSingleton.Instance().Id;
-            var list = Init().Where(ts => ts.Executor.Group.ManagerId.Equals(id));
-            Tasks       = new ObservableCollection<TaskModel>(list);
+            var list = Init();
+            if (UserModelSingleton.Instance().Role == Core.Enums.Role.Manager)
+                list = list.Where(ts => ts.Executor.Group.ManagerId.Equals(id));
+            else
+                list = list.Where(ts => ts.Executor.Id.Equals(id));
+
+            Tasks = new ObservableCollection<TaskModel>(list);
             FistNames   = new ObservableCollection<String>(list.Select(t => t.Executor.FirstName).Distinct());
             SecondNames = new ObservableCollection<String>(list.Select(t => t.Executor.SecondName).Distinct());
             LastNames   = new ObservableCollection<String>(list.Select(t => t.Executor.LastName).Distinct());

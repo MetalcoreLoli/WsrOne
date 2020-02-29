@@ -44,7 +44,14 @@ namespace Wsr1.ViewModel
                 {
                     dialogService.ShowErrorMessage(ex.Message);
                 }
-            }, obj => UserModelSingleton.Instance().Role == Core.Enums.Role.Manager));
+            }, obj => 
+            {
+
+                bool isManager = UserModelSingleton.Instance().Role == Core.Enums.Role.Manager;
+                if (!isManager) 
+                    dialogService.ShowErrorMessage("Только менеджеры могут просматривать документы !!!");
+                return isManager;
+            }));
         }
 
         public RelayCommand TaskCommand
