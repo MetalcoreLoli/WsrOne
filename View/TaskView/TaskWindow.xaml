@@ -46,7 +46,7 @@
                     <DataGridTextColumn
                         Header="Характер Работы"
                         Binding="{Binding NatureOfWork}"/>
-                    
+
                     <DataGridTextColumn
                         Header="Сложность"
                         Binding="{Binding Difficult}"/>
@@ -139,7 +139,6 @@
                         </ComboBox>
                         <TextBlock
                             Style="{StaticResource LineBox}"/>
-                        
                         <Label
                             Content="По Фамилии"
                             Style="{StaticResource MainStyleOfLable}"/>
@@ -158,7 +157,6 @@
                         </ComboBox>
                         <TextBlock
                             Style="{StaticResource LineBox}"/>
-                        
                         <Label
                             Content="По Отчеству"
                             Style="{StaticResource MainStyleOfLable}"/>

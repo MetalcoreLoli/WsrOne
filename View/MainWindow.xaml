@@ -60,7 +60,7 @@
                     />
             </StackPanel>
             <TextBlock
-                    Style="{StaticResource LineBox}"/>
+                Style="{StaticResource LineBox}"/>
         </StackPanel>
         <Grid
             Grid.Row="2">
